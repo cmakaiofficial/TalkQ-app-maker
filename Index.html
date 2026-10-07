@@ -2,9 +2,23 @@
 <html lang="en" data-theme="dark">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-<title>TalkQR App Maker</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>TalkQR App Maker – Micro-Apps in a QR Code</title>
+<meta name="description" content="Build self-contained micro-apps, image cards and HTML pages that live entirely inside a QR code. Free, offline-capable, no server needed.">
+<meta name="theme-color" content="#090d16">
+<meta property="og:type" content="website">
+<meta property="og:title" content="TalkQR App Maker">
+<meta property="og:description" content="Self-contained micro-apps in a QR code. Free and runs fully in your browser.">
+<meta name="twitter:card" content="summary">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232563eb'/%3E%3Ctext x='32' y='42' font-family='Arial' font-weight='800' font-size='26' text-anchor='middle' fill='white'%3EQR%3C/text%3E%3C/svg%3E">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+if (typeof QRCode === "undefined") {
+  const sc = document.createElement("script");
+  sc.src = "https://cdn.jsdelivr.net/npm/qrcodejs@1.0.0/qrcode.min.js";
+  document.head.appendChild(sc);
+}
+</script>
 <style>
 :root {
   --bg: #090d16;
@@ -68,7 +82,6 @@ body {
   overflow-x: hidden;
 }
 
-/* Header */
 header {
   display: flex;
   align-items: center;
@@ -81,11 +94,7 @@ header {
   z-index: 100;
 }
 
-.brand {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
+.brand { display: flex; align-items: center; gap: 10px; }
 
 .logo {
   width: 36px;
@@ -100,18 +109,9 @@ header {
   box-shadow: 0 4px 12px var(--accent-glow);
 }
 
-header h1 {
-  font-size: 16px;
-  font-weight: 700;
-  letter-spacing: -0.01em;
-}
+header h1 { font-size: 16px; font-weight: 700; letter-spacing: -0.01em; }
+header p { font-size: 11px; color: var(--mute); }
 
-header p {
-  font-size: 11px;
-  color: var(--mute);
-}
-
-/* Main Grid Layout */
 main {
   flex: 1;
   display: grid;
@@ -124,9 +124,7 @@ main {
 }
 
 @media (min-width: 900px) {
-  main {
-    grid-template-columns: 1fr 340px 1fr;
-  }
+  main { grid-template-columns: 1fr 340px 1fr; }
 }
 
 .card {
@@ -152,14 +150,8 @@ main {
   justify-content: space-between;
 }
 
-.pad {
-  padding: 16px;
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
+.pad { padding: 16px; display: flex; flex-direction: column; gap: 14px; }
 
-/* Touch-friendly Navigation Tabs */
 .tabs {
   display: flex;
   background: var(--bg);
@@ -188,7 +180,6 @@ main {
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
-/* Controls & Inputs */
 .btn {
   font-family: inherit;
   background: var(--accent);
@@ -209,9 +200,8 @@ main {
   width: 100%;
 }
 
-.btn:active:not(:disabled) {
-  transform: scale(0.98);
-}
+.btn:hover:not(:disabled) { background: var(--accent-hover); }
+.btn:active:not(:disabled) { transform: scale(0.98); }
 
 .btn-outline {
   background: transparent;
@@ -221,17 +211,10 @@ main {
   min-height: 42px;
 }
 
-.btn-outline:hover:not(:disabled) {
-  background: var(--panel-hover);
-}
+.btn-outline:hover:not(:disabled) { background: var(--panel-hover); }
 
-button:disabled {
-  opacity: 0.4;
-  cursor: not-allowed;
-  transform: none !important;
-}
+button:disabled { opacity: 0.4; cursor: not-allowed; transform: none !important; }
 
-/* Set 16px font-size to prevent iOS Safari auto-zoom on input focus */
 textarea, input[type="text"], input[type="file"] {
   width: 100%;
   font-family: inherit;
@@ -244,10 +227,7 @@ textarea, input[type="text"], input[type="file"] {
   transition: border-color 0.2s;
 }
 
-textarea {
-  min-height: 140px;
-  resize: vertical;
-}
+textarea { min-height: 140px; resize: vertical; }
 
 textarea.code {
   font-family: ui-monospace, SFMono-Regular, Consolas, monospace;
@@ -256,10 +236,7 @@ textarea.code {
   white-space: pre;
 }
 
-textarea:focus, input:focus {
-  outline: none;
-  border-color: var(--accent);
-}
+textarea:focus, input:focus { outline: none; border-color: var(--accent); }
 
 label {
   font-size: 12px;
@@ -270,18 +247,9 @@ label {
   gap: 6px;
 }
 
-.hint {
-  font-size: 12px;
-  color: var(--mute);
-  line-height: 1.4;
-}
+.hint { font-size: 12px; color: var(--mute); line-height: 1.4; }
 
-.msg {
-  font-size: 12px;
-  padding: 10px;
-  border-radius: 8px;
-  display: none;
-}
+.msg { font-size: 12px; padding: 10px; border-radius: 8px; display: none; }
 .msg:not(:empty) { display: block; }
 .msg.e { background: rgba(239, 68, 68, 0.12); color: var(--err); border: 1px solid rgba(239, 68, 68, 0.25); }
 .msg.o { background: rgba(16, 185, 129, 0.12); color: var(--ok); border: 1px solid rgba(16, 185, 129, 0.25); }
@@ -289,26 +257,10 @@ label {
 
 .pane[hidden] { display: none; }
 
-.chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
+.chips { display: flex; flex-wrap: wrap; gap: 6px; }
+.chips button { font-size: 12px; padding: 6px 12px; border-radius: 20px; min-height: 32px; width: auto; }
 
-.chips button {
-  font-size: 12px;
-  padding: 6px 12px;
-  border-radius: 20px;
-  min-height: 32px;
-}
-
-/* Responsive Mobile Phone Preview Frame */
-.phone-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 12px 0;
-}
+.phone-container { display: flex; justify-content: center; align-items: center; padding: 12px 0; }
 
 .ph {
   width: 100%;
@@ -336,24 +288,10 @@ label {
   z-index: 10;
 }
 
-iframe {
-  border: 0;
-  width: 100%;
-  height: 100%;
-  background: #fff;
-}
+iframe { border: 0; width: 100%; height: 100%; background: #fff; }
 
-/* QR Code Display Grid */
-.qrs {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 12px;
-  padding: 16px;
-}
-
-@media (min-width: 480px) {
-  .qrs { grid-template-columns: 1fr 1fr; }
-}
+.qrs { display: grid; grid-template-columns: 1fr; gap: 12px; padding: 16px; }
+@media (min-width: 480px) { .qrs { grid-template-columns: 1fr 1fr; } }
 
 .q {
   display: flex;
@@ -366,12 +304,7 @@ iframe {
   border: 1px solid var(--line);
 }
 
-.q h3 {
-  font-size: 12px;
-  font-weight: 700;
-  align-self: flex-start;
-  color: var(--ink);
-}
+.q h3 { font-size: 12px; font-weight: 700; align-self: flex-start; color: var(--ink); }
 
 .qb {
   background: #ffffff;
@@ -384,43 +317,16 @@ iframe {
   justify-content: center;
 }
 
-.qb canvas, .qb img {
-  width: 100% !important;
-  height: auto !important;
-  image-rendering: pixelated;
-  display: block;
-}
+.qb canvas, .qb img { width: 100% !important; height: auto !important; image-rendering: pixelated; display: block; }
+.qb span { color: #94a3b8; font-size: 11px; text-align: center; }
 
-.qb span {
-  color: #94a3b8;
-  font-size: 11px;
-  text-align: center;
-}
+.meter { width: 100%; height: 6px; border-radius: 3px; background: var(--line); overflow: hidden; }
+.meter i { display: block; height: 100%; width: 0%; background: var(--ok); transition: width 0.3s ease; }
+.q small { color: var(--mute); font-size: 11px; align-self: flex-start; }
 
-.meter {
-  width: 100%;
-  height: 6px;
-  border-radius: 3px;
-  background: var(--line);
-  overflow: hidden;
-}
+footer { text-align: center; font-size: 11px; color: var(--mute); padding: 8px 16px 16px; }
 
-.meter i {
-  display: block;
-  height: 100%;
-  width: 0%;
-  background: var(--ok);
-  transition: width 0.3s ease;
-}
-
-.q small {
-  color: var(--mute);
-  font-size: 11px;
-  align-self: flex-start;
-}
-
-/* Fullscreen App View (When scanned via hash) */
-body.rt header, body.rt main { display: none !important; }
+body.rt header, body.rt main, body.rt footer { display: none !important; }
 body.rt #rt { display: block; }
 #rt { display: none; position: fixed; inset: 0; width: 100vw; height: 100vh; border: 0; z-index: 9999; background: #fff; }
 </style>
@@ -438,8 +344,9 @@ body.rt #rt { display: block; }
   <button class="btn btn-outline" id="th" type="button" style="width: auto; min-height: 36px; padding: 6px 12px; font-size: 12px;">Theme</button>
 </header>
 
+<noscript><p style="padding:16px">JavaScript is required to use QR App Maker.</p></noscript>
+
 <main>
-  <!-- Step 1: Input -->
   <section class="card">
     <div class="card-header">1. Select Input Source</div>
     <div class="pad">
@@ -449,7 +356,6 @@ body.rt #rt { display: block; }
         <button role="tab" aria-selected="false" data-t="h" type="button">HTML Code</button>
       </div>
 
-      <!-- Prompt Mode -->
       <div class="pane" id="p">
         <label>
           Describe app functionality or select preset
@@ -461,7 +367,6 @@ body.rt #rt { display: block; }
         </div>
       </div>
 
-      <!-- Image Mode -->
       <div class="pane" id="i" hidden>
         <label>
           Select Image
@@ -474,7 +379,6 @@ body.rt #rt { display: block; }
         <p class="hint" style="margin-top: 6px;">Images are automatically compressed & resized to fit standard QR code byte limits.</p>
       </div>
 
-      <!-- HTML Mode -->
       <div class="pane" id="h" hidden>
         <label>
           Custom HTML & JavaScript
@@ -488,17 +392,15 @@ body.rt #rt { display: block; }
     </div>
   </section>
 
-  <!-- Step 2: Mobile Preview -->
   <section class="card">
     <div class="card-header">2. Live Mobile Preview</div>
     <div class="phone-container">
       <div class="ph">
-        <iframe id="pv" sandbox="allow-scripts allow-forms allow-modals" title="App Preview"></iframe>
+        <iframe id="pv" sandbox="allow-scripts allow-forms allow-modals allow-same-origin" title="App Preview"></iframe>
       </div>
     </div>
   </section>
 
-  <!-- Step 3: QR Downloads -->
   <section class="card">
     <div class="card-header">3. Download Scannable QR</div>
     <div class="qrs">
@@ -522,7 +424,7 @@ body.rt #rt { display: block; }
     <div class="pad" style="padding-top: 0;">
       <label>
         Online Domain / Base URL
-        <input type="text" id="base">
+        <input type="text" id="base" placeholder="https://yourname.github.io/your-repo/">
       </label>
       <p class="hint">
         <b>Offline QR:</b> Embeds the runnable code directly into a data link. Works entirely without internet access.<br>
@@ -532,7 +434,9 @@ body.rt #rt { display: block; }
   </section>
 </main>
 
-<iframe id="rt" sandbox="allow-scripts allow-forms allow-modals" title="Full App Runtime"></iframe>
+<footer>TalkQR App Maker · runs entirely in your browser · no data is uploaded</footer>
+
+<iframe id="rt" sandbox="allow-scripts allow-forms allow-modals allow-same-origin" title="Full App Runtime"></iframe>
 
 <script>
 "use strict";
@@ -540,7 +444,10 @@ body.rt #rt { display: block; }
 const $ = id => document.getElementById(id);
 const MAX_BYTES = 2850;
 
-/* HTML Minifier */
+function cleanUrl() {
+  return window.location.origin + window.location.pathname;
+}
+
 function mini(h) {
   if (!h) return "";
   return h
@@ -550,12 +457,10 @@ function mini(h) {
     .trim();
 }
 
-/* Data URL Encoder */
 function toData(h) {
   return "data:text/html;charset=utf-8," + encodeURIComponent(h);
 }
 
-/* Base64 Helpers */
 function b64(u) {
   let s = "";
   const len = u.length;
@@ -570,13 +475,10 @@ function unb64(s) {
   while (str.length % 4) str += "=";
   const binary = atob(str);
   const bytes = new Uint8Array(binary.length);
-  for (let i = 0; i < binary.length; i++) {
-    bytes[i] = binary.charCodeAt(i);
-  }
+  for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
   return bytes;
 }
 
-/* Raw Deflate Compression */
 async function pack(h) {
   const raw = new TextEncoder().encode(h);
   if (window.CompressionStream) {
@@ -609,7 +511,6 @@ function say(t, k) {
   el.className = "msg " + (k || "");
 }
 
-/* Tab Switching */
 let tab = "p";
 document.querySelectorAll(".tabs button").forEach(b => {
   b.onclick = () => {
@@ -636,10 +537,9 @@ PRESETS.forEach(t => {
   $("ex").appendChild(b);
 });
 
-/* Offline Client App Engine */
 function generateBuiltinApp(p) {
   const q = p.toLowerCase();
-  
+
   if (q.includes("tip") || q.includes("split") || q.includes("bill")) {
     return `<meta name="viewport" content="width=device-width,initial-scale=1">
 <style>
@@ -747,15 +647,14 @@ button{width:100%;max-width:240px;padding:14px;margin:6px;border-radius:10px;bor
 </div>`;
 }
 
-/* Image Downsampler */
 function fromImage(file, cap) {
   return new Promise((res, rej) => {
     const img = new Image();
     const u = URL.createObjectURL(file);
-    img.onerror = () => rej(new Error("Unable to decode image file."));
+    img.onerror = () => { URL.revokeObjectURL(u); rej(new Error("Unable to decode image file.")); };
     img.onload = () => {
       const wrap = src => `<meta name="viewport" content="width=device-width,initial-scale=1"><body style="margin:0;min-height:100vh;display:grid;place-items:center;background:#000;color:#fff;font-family:system-ui;text-align:center"><div><img src="${src}" style="width:100%;max-width:380px;display:block;margin:auto">${cap ? `<p style="margin-top:10px;font-size:13px">${esc(cap)}</p>` : ""}</div>`;
-      
+
       const sizes = [200, 160, 128, 112, 96, 80, 64, 48];
       const qualities = [0.6, 0.4, 0.25];
 
@@ -776,16 +675,20 @@ function fromImage(file, cap) {
           }
         }
       }
+      URL.revokeObjectURL(u);
       rej(new Error("Image payload too detailed for QR code limits. Try a simpler logo or icon."));
     };
     img.src = u;
   });
 }
 
-/* Render QR Codes */
 function draw(id, text) {
   const el = $(id);
   el.innerHTML = "";
+  if (typeof QRCode === "undefined") {
+    el.innerHTML = "<span>QR library loading or blocked...</span>";
+    return false;
+  }
   if (text.length > MAX_BYTES) {
     el.innerHTML = "<span>Exceeds QR capacity</span>";
     return false;
@@ -814,11 +717,10 @@ function updateMeter(mId, sId, len) {
   $(sId).textContent = `${len} bytes (${p.toFixed(0)}%)`;
 }
 
-/* Build Handler */
 async function build() {
   $("go").disabled = true;
   say("Generating app payload...", "w");
-  
+
   try {
     let h;
     if (tab === "p") {
@@ -828,7 +730,7 @@ async function build() {
     } else if (tab === "i") {
       const f = $("fi").files[0];
       if (!f) throw new Error("Please select an image file first.");
-      say("Processing image...");
+      say("Processing image...", "w");
       h = await fromImage(f, $("cap").value.trim());
     } else {
       h = $("ht").value;
@@ -839,7 +741,8 @@ async function build() {
     $("pv").srcdoc = h;
 
     const off = toData(h);
-    const baseUrl = ($("base").value.trim() || location.href.split("#")[0]);
+    let baseUrl = ($("base").value.trim() || cleanUrl());
+    baseUrl = baseUrl.split("#")[0];
     const onlinePayload = baseUrl + "#app=" + await pack(h);
 
     const fitOffline = draw("q1", off);
@@ -867,22 +770,20 @@ async function build() {
 
 $("go").onclick = build;
 
-/* Download PNG Function */
 async function saveQR(id, filename) {
   const container = $(id);
   const srcCanvas = container.querySelector("canvas");
   const srcImg = container.querySelector("img");
-  
+
   let source = srcCanvas;
   if (!source && srcImg) {
     const tmp = document.createElement("canvas");
     tmp.width = srcImg.naturalWidth || 300;
     tmp.height = srcImg.naturalHeight || 300;
-    const ctx = tmp.getContext("2d");
-    ctx.drawImage(srcImg, 0, 0);
+    tmp.getContext("2d").drawImage(srcImg, 0, 0);
     source = tmp;
   }
-  
+
   if (!source) return;
 
   const margin = 30;
@@ -890,7 +791,7 @@ async function saveQR(id, filename) {
   outCanvas.width = source.width + margin * 2;
   outCanvas.height = source.height + margin * 2;
   const ctx = outCanvas.getContext("2d");
-  
+
   ctx.fillStyle = "#ffffff";
   ctx.fillRect(0, 0, outCanvas.width, outCanvas.height);
   ctx.imageSmoothingEnabled = false;
@@ -901,34 +802,42 @@ async function saveQR(id, filename) {
   a.href = URL.createObjectURL(blob);
   a.download = filename;
   a.click();
-  URL.revokeObjectURL(a.href);
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
 }
 
 $("d1").onclick = () => saveQR("q1", "qr-app-offline.png");
 $("d2").onclick = () => saveQR("q2", "qr-app-online.png");
 
-/* Theme Switcher */
+try {
+  const saved = localStorage.getItem("qrapp-theme");
+  if (saved) document.documentElement.setAttribute("data-theme", saved);
+} catch (e) {}
+
 $("th").onclick = () => {
   const r = document.documentElement;
-  const current = r.getAttribute("data-theme") || "dark";
-  r.setAttribute("data-theme", current === "dark" ? "light" : "dark");
+  const next = (r.getAttribute("data-theme") || "dark") === "dark" ? "light" : "dark";
+  r.setAttribute("data-theme", next);
+  try { localStorage.setItem("qrapp-theme", next); } catch (e) {}
 };
 
-/* Unpack Scan Receiver */
-(async () => {
+async function receive() {
   const hashMatch = location.hash.match(/^#app=([zr]\..+)$/);
   if (hashMatch) {
     try {
       const decodedHtml = await unpack(hashMatch[1]);
-      document.body.classList.add("rt");
       $("rt").srcdoc = decodedHtml;
+      document.body.classList.add("rt");
       return;
     } catch (e) {
       console.error("Failed to decode application payload hash.", e);
     }
   }
-  $("base").value = location.href.split("#")[0];
-})();
+  document.body.classList.remove("rt");
+  if (!$("base").value) $("base").value = cleanUrl();
+}
+
+window.addEventListener("hashchange", receive);
+receive();
 </script>
 </body>
-  </html>
+</html>
